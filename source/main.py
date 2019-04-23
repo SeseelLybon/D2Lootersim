@@ -8,6 +8,8 @@ from pyglet.window import mouse
 window = pyglet.window.Window(width=1000,height=600)
 
 import logging
+logging.critical("Booting...")
+
 
 from label_generator import batch
 from label_generator import items_dict
@@ -35,13 +37,11 @@ def throw_loot():
         if Litem.power < rand:
             Litem.power = rand
     print(itemtype, tierkey, rand)
-    pass
 
 
 @window.event
 def on_draw():
 
-    throw_loot()
 
     avg = 0
     for value in items_dict.values():
@@ -60,10 +60,13 @@ def on_draw():
 @window.event
 def on_key_press(symbol, modifiers):
     if symbol == key.UP:
-        pass
+        throw_loot()
 
 
+def updatescreen(dt):
+    pass
 
+pyglet.clock.schedule_interval(updatescreen, 1)
 
 
 logging.critical("Pyglet.run()")
